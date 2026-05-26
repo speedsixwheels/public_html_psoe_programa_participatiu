@@ -9,3 +9,107 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: astra-child
 Template: astra
 */
+
+
+.field--type-survey {
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;
+    border: 1px solid rgba(21, 55, 92, 0.12);
+    border-radius: 22px;
+    background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
+    box-shadow: 0 18px 48px rgba(21, 55, 92, 0.12);
+}
+
+.gform-field-label:where(:not([class*=gform-field-label--type-])) {
+    margin-top: 1rem !important;
+    background-color: blue !important;
+}
+
+
+
+    /** RESULTS **/
+    .gf-survey-results-wrap {
+        --gf-survey-columns: 2;
+        --gf-survey-gap: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--gf-survey-gap);
+        align-items: stretch;
+        margin: 2rem 0;
+    }
+
+    .gf-survey-results-item {
+        display: flex;
+    }
+
+
+    .gf-survey-results-card {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        padding: 1.5rem;
+        border: 1px solid rgba(21, 55, 92, 0.12);
+        border-radius: 22px;
+        background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
+        box-shadow: 0 18px 48px rgba(21, 55, 92, 0.12);
+        overflow: hidden;
+    }
+
+    .gf-survey-results-title {
+        margin: 0 0 1rem;
+        color: #15375c;
+        font-size: 1.15rem;
+        font-weight: 700;
+        line-height: 1.35;
+    }
+
+    .gf-survey-results-canvas-wrap {
+        position: relative;
+        min-height: 280px;
+        padding: 1rem;
+        border-radius: 18px;
+        background: radial-gradient(circle at top, rgba(52, 116, 235, 0.14), rgba(52, 116, 235, 0.02) 55%, rgba(255, 255, 255, 0.96) 100%);
+    }
+
+    .gf-survey-results-canvas-wrap canvas {
+        width: 100% !important;
+        height: 280px !important;
+    }
+
+    .gf-survey-results-meta {
+        margin: 1.25rem 0 0;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(21, 55, 92, 0.1);
+        color: #4b5d73;
+        font-size: 0.95rem;
+    }
+
+    .gf-survey-results-meta strong {
+        color: #15375c;
+        font-size: 1rem;
+    }
+
+    @media (max-width: 921px) {
+        .gf-survey-results-wrap {
+            --gf-survey-columns: 2;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .gf-survey-results-wrap {
+            --gf-survey-columns: 1;
+        }
+
+        .gf-survey-results-item {
+            min-width: 100% !important;
+            max-width: 100% !important;
+            flex-basis: 100% !important;
+        }
+
+        .gf-survey-results-card {
+            padding: 1.25rem;
+            border-radius: 18px;
+        }
+    }

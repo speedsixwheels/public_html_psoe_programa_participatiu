@@ -54,9 +54,9 @@ function resultados_encuesta_chart_shortcode($atts) {
     $chart_type   = resultados_encuesta_chart_get_chart_type($atts['tipo']);
     $columns      = resultados_encuesta_chart_get_columns($atts['columnas']);
     $column_gap   = 24;
-    $item_width   = 'calc((100% - ' . (($columns - 1) * $column_gap) . 'px) / ' . $columns . ')';
-    $wrapper_style = 'display:flex;flex-wrap:wrap;gap:' . $column_gap . 'px;max-width:1400px;margin:40px auto;align-items:stretch;';
-    $item_style    = 'flex:1 1 ' . $item_width . ';max-width:' . $item_width . ';min-width:280px;';
+    $wrap_style   = '--gf-survey-columns:' . $columns . ';--gf-survey-gap:' . $column_gap . 'px;';
+    $item_width   = 'calc((100% - (var(--gf-survey-columns) - 1) * var(--gf-survey-gap)) / var(--gf-survey-columns))';
+    $item_style   = 'flex:1 1 ' . $item_width . ';max-width:' . $item_width . ';min-width:280px;';
 
     if (empty($form_id)) {
         return 'Debes indicar el formulario. Ejemplo: [resultados_encuesta_chart form_id="1"]';
@@ -81,7 +81,7 @@ function resultados_encuesta_chart_shortcode($atts) {
         'page_size' => 10000
     ]);
 
-	
+
 
     if (is_wp_error($entries) || empty($entries)) {
         return 'Todavía no hay resultados.';
@@ -90,7 +90,7 @@ function resultados_encuesta_chart_shortcode($atts) {
     ob_start();
 
 
-    echo '<div class="gf-survey-results-wrap" style="' . esc_attr($wrapper_style) . '">';
+    echo '<div class="gf-survey-results-wrap" style="' . esc_attr($wrap_style) . '">';
 
     foreach ($fields as $field) {
         $resultados = [];
