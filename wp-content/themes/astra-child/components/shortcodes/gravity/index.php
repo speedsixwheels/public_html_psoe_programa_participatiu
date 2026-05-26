@@ -1,9 +1,7 @@
 <?php
 
 
-// Genera un grafico por cada campo Survey del formulario usando las entradas activas.
 
-add_shortcode('resultados_encuesta_chart', 'resultados_encuesta_chart_shortcode');   
 
 
 // Genera colores aleatorios para asignar un color distinto a cada barra de la encuesta.
@@ -38,6 +36,9 @@ function resultados_encuesta_chart_get_columns($columns) {
     return min($columns, 6);
 }
 
+// Genera un grafico por cada campo Survey del formulario usando las entradas activas.
+
+add_shortcode('resultados_encuesta_chart', 'resultados_encuesta_chart_shortcode');   
 function resultados_encuesta_chart_shortcode($atts) {
     if (!class_exists('GFAPI')) {
         return 'Gravity Forms no está activo.';

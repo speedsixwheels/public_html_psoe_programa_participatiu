@@ -10,6 +10,51 @@ Text Domain: astra-child
 Template: astra
 */
 
+/** GRAVITY FORMS **/
+.gform-theme--framework .gfield:where(:not(.gfield--type-html):not(.gfield--type-section)) {
+    border: 1px solid #c62828;
+    border-radius: 22px;
+    background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
+    box-shadow: 0 18px 48px rgba(21, 55, 92, 0.12);
+     padding: 1.5rem;
+}
+
+.gform-theme--framework .gfield:where(:not(.gfield--type-html):not(.gfield--type-section)) legend.gfield_label.gform-field-label.gfield_label_before_complex {
+    background-color: #c62828;
+    color: #ffffff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+}
+
+
+.gform_wrapper.gravity-theme legend.gfield_label.gform-field-label.gfield_label_before_complex {
+    background-color: #c62828;
+    color: #ffffff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+}
+
+.gform_wrapper.gravity-theme .gform_confirmation_message,
+#gform_confirmation_message_1 {
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(46, 125, 50, 0.2);
+    border-radius: 10px;
+    background: #f3fbf4;
+    color: #1f5f2c;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+    .gform_wrapper.gravity-theme .gform_confirmation_message,
+    #gform_confirmation_message_1 {
+        padding: 0.9rem 1rem;
+        border-radius: 8px;
+        font-size: 0.95rem;
+    }
+}
 
 .field--type-survey {
     width: 100%;
@@ -21,14 +66,9 @@ Template: astra
     box-shadow: 0 18px 48px rgba(21, 55, 92, 0.12);
 }
 
-.gform-field-label:where(:not([class*=gform-field-label--type-])) {
-    margin-top: 1rem !important;
-    background-color: blue !important;
-}
 
 
-
-    /** RESULTS **/
+ /** RESULTS **/
     .gf-survey-results-wrap {
         --gf-survey-columns: 2;
         --gf-survey-gap: 24px;
