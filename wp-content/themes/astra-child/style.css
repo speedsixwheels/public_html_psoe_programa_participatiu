@@ -47,6 +47,12 @@ Template: astra
     line-height: 1.6;
 }
 
+.gform_button{
+     background-color: #000 !important;
+     width: 100% !important;
+}
+
+
 @media (max-width: 640px) {
     .gform_wrapper.gravity-theme .gform_confirmation_message,
     #gform_confirmation_message_1 {
