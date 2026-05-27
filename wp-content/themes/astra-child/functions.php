@@ -20,6 +20,7 @@ function child_enqueue_styles() {
 	$child_style_path = get_stylesheet_directory() . '/style.css';
 	$child_style_ver  = file_exists( $child_style_path ) ? filemtime( $child_style_path ) : CHILD_THEME_ASTRA_CHILD_VERSION;
 
+	wp_enqueue_style( 'astra-child-open-sans', 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap', array(), null );
 	wp_enqueue_style( 'astra-child-theme-css', get_stylesheet_directory_uri() . '/style.css', array( 'astra-theme-css' ), $child_style_ver, 'all' );
 
 }
