@@ -39,6 +39,14 @@ function resultados_encuesta_chart_get_columns($columns) {
 // Genera un grafico por cada campo Survey del formulario usando las entradas activas.
 
 add_shortcode('resultados_encuesta_chart', 'resultados_encuesta_chart_shortcode');   
+add_shortcode('resultados_encuesta_doughnut', 'resultados_encuesta_doughnut_shortcode');
+
+function resultados_encuesta_doughnut_shortcode($atts) {
+    $atts['tipo'] = 'doughnut';
+
+    return resultados_encuesta_chart_shortcode($atts);
+}
+
 function resultados_encuesta_chart_shortcode($atts) {
     if (!class_exists('GFAPI')) {
         return 'Gravity Forms no está activo.';
@@ -123,7 +131,9 @@ function resultados_encuesta_chart_shortcode($atts) {
         $total  = array_sum($data);
         $field_id = resultados_encuesta_chart_get_field_property($field, 'id');
         $title  = resultados_encuesta_chart_get_field_property($field, 'label', 'Resultados pregunta ' . $field_id);
-        $colors = $chart_type === 'bar' ? resultados_encuesta_chart_get_bar_colors(count($data)) : null;
+        $uses_segment_colors = in_array($chart_type, array('bar', 'pie', 'doughnut', 'polarArea'), true);
+        $shows_legend        = in_array($chart_type, array('pie', 'doughnut', 'polarArea'), true);
+        $colors = $uses_segment_colors ? resultados_encuesta_chart_get_bar_colors(count($data)) : null;
 
         $canvas_id = 'chart_encuesta_' . uniqid();
         ?>
@@ -137,7 +147,7 @@ function resultados_encuesta_chart_shortcode($atts) {
                 </div>
 
                 <p class="gf-survey-results-meta">
-                Total respuestas:
+                Total de respostes:
                 <strong><?php echo esc_html($total); ?></strong>
                 </p>
             </div>
@@ -147,6 +157,7 @@ function resultados_encuesta_chart_shortcode($atts) {
         document.addEventListener('DOMContentLoaded', function () {
 
             const ctx = document.getElementById('<?php echo esc_js($canvas_id); ?>');
+            const chartFontFamily = '"Open Sans", sans-serif';
 
             if (!ctx) return;
 
@@ -164,11 +175,39 @@ function resultados_encuesta_chart_shortcode($atts) {
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
+                    font: {
+                        family: chartFontFamily,
+                        size: 12
+                    },
+                    color: '#000000',
                     plugins: {
                         legend: {
-                            display: false
+                            display: <?php echo wp_json_encode($shows_legend); ?>,
+                            position: 'bottom',
+                            labels: {
+                                color: '#000000',
+                                font: {
+                                    family: chartFontFamily,
+                                    size: 12,
+                                    weight: '600'
+                                },
+                                padding: 12,
+                                usePointStyle: true,
+                                boxWidth: 10
+                            }
                         },
                         tooltip: {
+                            titleColor: '#ffffff',
+                            bodyColor: '#ffffff',
+                            titleFont: {
+                                family: chartFontFamily,
+                                size: 12
+                            },
+                            bodyFont: {
+                                family: chartFontFamily,
+                                size: 12  
+                            },
                             callbacks: {
                                 label: function(context) {
                                     const total = <?php echo (int) $total; ?>;
@@ -179,14 +218,32 @@ function resultados_encuesta_chart_shortcode($atts) {
                             }
                         }
                     },
+                    <?php if (!$shows_legend) : ?>
                     scales: {
+                        x: {
+                            ticks: {
+                                color: '#000000',
+                                font: {
+                                    family: chartFontFamily,
+                                    size: 12,
+                                    weight: '600'
+                                }
+                            }
+                        },
                         y: {
                             beginAtZero: true,
                             ticks: {
+                                color: '#000000',
+                                font: {
+                                    family: chartFontFamily,
+                                    size: 12,
+                                    weight: '600'
+                                },
                                 precision: 0
                             }
                         }
                     }
+                    <?php endif; ?>
                 }
             });
 

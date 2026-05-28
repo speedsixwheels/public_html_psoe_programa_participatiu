@@ -113,15 +113,16 @@ Template: astra
 
     .gf-survey-results-canvas-wrap {
         position: relative;
-        min-height: 280px;
+        height: 280px;
         padding: 1rem;
         border-radius: 18px;
         background: radial-gradient(circle at top, rgba(52, 116, 235, 0.14), rgba(52, 116, 235, 0.02) 55%, rgba(255, 255, 255, 0.96) 100%);
     }
 
     .gf-survey-results-canvas-wrap canvas {
+        display: block;
         width: 100% !important;
-        height: 280px !important;
+        height: 100% !important;
     }
 
     .gf-survey-results-meta {
