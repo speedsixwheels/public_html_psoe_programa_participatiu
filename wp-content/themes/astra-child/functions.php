@@ -27,8 +27,6 @@ function child_enqueue_styles() {
 
 add_action( 'wp_enqueue_scripts', 'child_enqueue_styles', 999 );
 
-
-
   
 get_template_part('components/functions/index');
 get_template_part('components/functions/gravity/index');
