@@ -23,10 +23,10 @@ define( 'WP_CACHE', true );
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'u937561055_Jz1AK' );
+define( 'DB_NAME', 'u937561055_psoe_programa' );
 
 /** Database username */
-define( 'DB_USER', 'u937561055_YWVJq' );
+define( 'DB_USER', 'u937561055_psoe_programa' );
 
 /** Database password */
 define( 'DB_PASSWORD', 'vJykHy3Tp1' );
@@ -71,7 +71,7 @@ define( 'WP_CACHE_KEY_SALT', 'K-B#f5o20h}=,jrKfO!rv:pWm35Whif&?H.=eES.&4r,yAw;Tc
  * a unique prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix = 'wp_';
-
+  
 
 /* Add any custom values between this line and the "stop editing" line. */
 
@@ -97,6 +97,9 @@ define( 'FS_METHOD', 'direct' );
 define( 'COOKIEHASH', '454b3b34b4593318a62ee162b5fe44a8' );
 define( 'WP_AUTO_UPDATE_CORE', 'minor' );
 /* That's all, stop editing! Happy publishing. */
+
+
+define( 'WP_MEMORY_LIMIT', '256M' );  
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
