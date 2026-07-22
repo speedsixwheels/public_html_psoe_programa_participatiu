@@ -55,7 +55,7 @@ function resultados_encuesta_chart_shortcode($atts) {
     $atts = shortcode_atts([
         'form_id'  => '',
         'tipo'     => 'bar',
-        'columnas' => 2,
+        'columnas' => 1,
        
     ], $atts);
 
@@ -105,6 +105,7 @@ function resultados_encuesta_chart_shortcode($atts) {
         $resultados = [];
 
         foreach ($entries as $entry) {
+            pre($entry);
             $valores = resultados_encuesta_chart_get_entry_answers($entry, $field);
 
             foreach ($valores as $valor) {
@@ -131,9 +132,20 @@ function resultados_encuesta_chart_shortcode($atts) {
         $total  = array_sum($data);
         $field_id = resultados_encuesta_chart_get_field_property($field, 'id');
         $title  = resultados_encuesta_chart_get_field_property($field, 'label', 'Resultados pregunta ' . $field_id);
+        $admin_label = trim((string) resultados_encuesta_chart_get_field_property($field, 'adminLabel', ''));
         $uses_segment_colors = in_array($chart_type, array('bar', 'pie', 'doughnut', 'polarArea'), true);
         $shows_legend        = in_array($chart_type, array('pie', 'doughnut', 'polarArea'), true);
+        $is_horizontal_bar   = $chart_type === 'bar';
+        $uses_html_legend    = $chart_type === 'doughnut';
+        $legend_position     = $chart_type === 'doughnut' ? 'bottom' : 'right';
         $colors = $uses_segment_colors ? resultados_encuesta_chart_get_bar_colors(count($data)) : null;
+        $canvas_height = 280;
+
+        if ($is_horizontal_bar) {
+            $canvas_height = max(280, count($labels) * 52);
+        } elseif ($shows_legend && !$uses_html_legend) {
+            $canvas_height = max(280, count($labels) * 30);
+        }
 
         $canvas_id = 'chart_encuesta_' . uniqid();
         ?>
@@ -141,10 +153,32 @@ function resultados_encuesta_chart_shortcode($atts) {
         <div class="gf-survey-results-item" style="<?php echo esc_attr($item_style); ?>">
             <div class="gf-survey-results-card">
                 <h3 class="gf-survey-results-title"><?php echo esc_html($title); ?></h3>
+           
 
-                <div class="gf-survey-results-canvas-wrap">
+                <div class="gf-survey-results-canvas-wrap" style="height:<?php echo esc_attr($canvas_height); ?>px;">
                     <canvas id="<?php echo esc_attr($canvas_id); ?>"></canvas>
                 </div>
+
+                <?php if ($uses_html_legend && $colors) : ?>
+                <ul class="gf-survey-results-legend" aria-label="Leyenda del gráfico">
+                    <?php foreach ($labels as $index => $label) : ?>
+                    <li class="gf-survey-results-legend-item">
+                        <span class="gf-survey-results-legend-swatch" style="background-color:<?php echo esc_attr($colors['background'][$index]); ?>;"></span>
+                        <span class="gf-survey-results-legend-text"><?php echo esc_html($label); ?></span>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+
+                <h4>Altres</h4>
+                <hr />  
+
+               
+
+                
+                    
+               
+             
 
                 <p class="gf-survey-results-meta">
                 Total de respostes:
@@ -176,6 +210,7 @@ function resultados_encuesta_chart_shortcode($atts) {
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    indexAxis: <?php echo wp_json_encode($is_horizontal_bar ? 'y' : 'x'); ?>,
                     font: {
                         family: chartFontFamily,
                         size: 12
@@ -183,8 +218,9 @@ function resultados_encuesta_chart_shortcode($atts) {
                     color: '#000000',
                     plugins: {
                         legend: {
-                            display: <?php echo wp_json_encode($shows_legend); ?>,
-                            position: 'bottom',
+                            display: <?php echo wp_json_encode($shows_legend && !$uses_html_legend); ?>,
+                            position: <?php echo wp_json_encode($shows_legend ? $legend_position : 'bottom'); ?>,
+                            align: 'start',
                             labels: {
                                 color: '#000000',
                                 font: {
@@ -221,17 +257,19 @@ function resultados_encuesta_chart_shortcode($atts) {
                     <?php if (!$shows_legend) : ?>
                     scales: {
                         x: {
+                            beginAtZero: <?php echo wp_json_encode($is_horizontal_bar); ?>,
                             ticks: {
                                 color: '#000000',
                                 font: {
                                     family: chartFontFamily,
                                     size: 12,
                                     weight: '600'
-                                }
+                                },
+                                precision: 0
                             }
                         },
                         y: {
-                            beginAtZero: true,
+                            beginAtZero: <?php echo wp_json_encode(!$is_horizontal_bar); ?>,
                             ticks: {
                                 color: '#000000',
                                 font: {

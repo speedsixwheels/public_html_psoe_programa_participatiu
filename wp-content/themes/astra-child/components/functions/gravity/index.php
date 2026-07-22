@@ -28,6 +28,28 @@ function resultados_encuesta_chart_get_field($form, $field_id) {
 }
 
 
+// Busca un field concreto por su etiqueta de administracion dentro del formulario.
+function resultados_encuesta_chart_get_field_by_admin_label($form, $admin_label) {
+    $admin_label = trim((string) $admin_label);
+
+    if ($admin_label === '') {
+        return null;
+    }
+
+    $fields = resultados_encuesta_chart_get_field_property($form, 'fields', array());
+
+    foreach ($fields as $field) {
+        $field_admin_label = trim((string) resultados_encuesta_chart_get_field_property($field, 'adminLabel', ''));
+
+        if ($field_admin_label === $admin_label) {
+            return $field;
+        }
+    }
+
+    return null;
+}
+
+
 // Obtiene el subtipo real del campo Survey para saber como leer sus respuestas.
 function resultados_encuesta_chart_get_input_type($field) {
     $type = resultados_encuesta_chart_get_field_property($field, 'inputType');
