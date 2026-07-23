@@ -101,13 +101,22 @@ function resultados_encuesta_chart_shortcode($atts) {
 
     echo '<div class="gf-survey-results-wrap" style="' . esc_attr($wrap_style) . '">';
 
+  
+
+
     foreach ($fields as $field) {
         $resultados = [];
 
-        foreach ($entries as $entry) {
-            pre($entry);
-            $valores = resultados_encuesta_chart_get_entry_answers($entry, $field);
+       //bloc_1_altres
 
+       
+
+        foreach ($entries as $entry) {
+                $entry_con_labels = resultados_encuesta_chart_get_entry_labeled_values($entry, $form);
+                pre($entry_con_labels);
+            $valores = resultados_encuesta_chart_get_entry_answers($entry, $field);
+      
+          
             foreach ($valores as $valor) {
                 if ($valor === '') {
                     continue;

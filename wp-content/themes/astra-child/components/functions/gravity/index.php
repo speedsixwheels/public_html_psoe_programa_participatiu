@@ -230,6 +230,48 @@ function resultados_encuesta_chart_get_entry_answers($entry, $field) {
 }
 
 
+// Convierte una entry en un array asociativo por admin_label con sus etiquetas y valores legibles.
+function resultados_encuesta_chart_get_entry_labeled_values($entry, $form) {
+    $entry_labeled_values = array();
+    $fields               = resultados_encuesta_chart_get_field_property($form, 'fields', array());
+
+    foreach ($fields as $field) {
+        $field_id          = (string) resultados_encuesta_chart_get_field_property($field, 'id');
+        $field_label       = trim((string) resultados_encuesta_chart_get_field_property($field, 'label', 'Campo ' . $field_id));
+        $field_admin_label = trim((string) resultados_encuesta_chart_get_field_property($field, 'adminLabel', ''));
+        $entry_key         = $field_admin_label !== '' ? $field_admin_label : $field_id;
+
+        if ($entry_key === '') {
+            continue;
+        }
+
+        if (resultados_encuesta_chart_get_field_type($field) === 'survey') {
+            $field_values = resultados_encuesta_chart_get_entry_answers($entry, $field);
+        } else {
+            $field_values = array();
+            $field_value  = isset($entry[$field_id]) ? trim((string) $entry[$field_id]) : '';
+
+            if ($field_value !== '') {
+                $field_values[] = $field_value;
+            }
+        }
+
+        if (empty($field_values)) {
+            continue;
+        }
+
+        $entry_labeled_values[$entry_key] = array(
+            'field_id'    => $field_id,
+            'label'       => $field_label,
+            'admin_label' => $field_admin_label,
+            'value'       => count($field_values) === 1 ? reset($field_values) : $field_values,
+        );
+    }
+
+    return $entry_labeled_values;
+}
+
+
 
 
 ?>
