@@ -96,16 +96,32 @@ function resultados_encuesta_chart_shortcode($atts) {
         return 'Todavía no hay resultados.';
     }
 
+    ob_start();
 
-  $question_number = 0;
+
+    echo '<div class="gf-survey-results-wrap" style="' . esc_attr($wrap_style) . '">';
+
+  
+
+
+    $question_number = 0;
+
     foreach ($fields as $field) {
         $resultados = [];
 
         $resultados_altres = [];
+
+       
+
         foreach ($entries as $entry) {
-                $entry_con_labels = resultados_encuesta_chart_get_entry_labeled_values($entry, $form);
+            $index_bloc = 1;
+                 $entry_con_labels = resultados_encuesta_chart_get_entry_labeled_values($entry, $form);
+
 
                 foreach ($entry_con_labels as $entry_key => $entry_data) {
+
+                
+                
                     if (strpos($entry_key, 'altres') !== false) {
                         $field_values = is_array($entry_data['value']) ? $entry_data['value'] : array($entry_data['value']);
                         foreach ($field_values as $field_value) {
@@ -124,7 +140,17 @@ function resultados_encuesta_chart_shortcode($atts) {
                     }
                 }
 
+                //pre($resultados_altres);
 
+        
+
+          
+       
+       
+
+                //$entry_con_etiquetas = resultados_encuesta_entry_use_admin_labels($entry, $form);
+              
+          
             $valores = resultados_encuesta_chart_get_entry_answers($entry, $field);
 
             foreach ($valores as $valor) {
@@ -135,6 +161,7 @@ function resultados_encuesta_chart_shortcode($atts) {
                 if (!isset($resultados[$valor])) {
                     $resultados[$valor] = 0;
                 }
+
                 $resultados[$valor]++;
             }
         }
@@ -170,10 +197,11 @@ function resultados_encuesta_chart_shortcode($atts) {
         $canvas_id = 'chart_encuesta_' . uniqid();
         ?>
 
-<br />
+
         <div class="gf-survey-results-item" style="<?php echo esc_attr($item_style); ?>">
             <div class="gf-survey-results-card">
                 <h3 class="gf-survey-results-title"><?php echo esc_html($title); ?></h3>
+             
            
 
                 <div class="gf-survey-results-canvas-wrap" style="height:<?php echo esc_attr($canvas_height); ?>px;">
@@ -181,32 +209,20 @@ function resultados_encuesta_chart_shortcode($atts) {
                 </div>
 
                 <?php if ($uses_html_legend && $colors) : ?>
+
                 <ul class="gf-survey-results-legend" aria-label="Leyenda del gráfico">
-                    <?php foreach ($labels as $index => $label) : ?>
+                    <?php foreach ($labels as $index => $label) :  ?>
+                          
                     <li class="gf-survey-results-legend-item">
                         <span class="gf-survey-results-legend-swatch" style="background-color:<?php echo esc_attr($colors['background'][$index]); ?>;"></span>
                         <span class="gf-survey-results-legend-text"><?php echo esc_html($label); ?></span>
-                        <span class="gf-survey-results-legend-stats">
-                            <?php
-                            $votes      = isset($data[$index]) ? (int) $data[$index] : 0;
-                            $percentage = $total > 0 ? ($votes / $total) * 100 : 0;
-                            echo '<label style="background-color: gray; padding: 5px; border-radius: 3px; color: white; font-size: 12px;">';
-                            echo esc_html(
-                                sprintf(
-                                    _n('%s voto', '%s votos', $votes, 'astra-child'),
-                                    number_format_i18n($votes)
-                                ) . ' (' . number_format_i18n($percentage, 1) . '%)'
-                            );
-                            echo "</label>";
-                            ?>
-                        </span>
                     </li>
-                    <?php endforeach; ?>  
+                    <?php endforeach; ?>
                 </ul>
                 <?php endif; ?>
 
             
-              <?php if (!empty($resultados_altres)) : ?>
+                <?php if (!empty($resultados_altres)) : ?>
                     <br />
                     <h4>Altres</h4>
                     <hr />
@@ -215,22 +231,18 @@ function resultados_encuesta_chart_shortcode($atts) {
                   $index_altres = 'bloc_' . $question_number . '_altres';
                   ?>
                 
-                <?php echo "<ul>" ?>
-                  <?php foreach ($resultados_altres[$index_altres] as $key_altres => $value_altres) : ?>
-                      <ul>
-                          <?php echo esc_html($key_altres); ?>: <strong><?php echo esc_html($value_altres['count']) ?></strong>
-                      </ul>
+                  <?php echo '<ul>'; ?>
+                  <?php foreach ($resultados_altres[$index_altres] as $field_value => $data) : ?>
+                      <li>
+                          <?php echo esc_html($field_value); ?>: <strong><?php echo esc_html($data['count']) . ' vots' ?></strong>
+                      </li>
                   <?php endforeach; ?>
-                  <?php echo "</ul>" ?>
-                
+                  <?php echo '</ul>'; ?>
                   
                 <?php endif; ?>
                 
 
-                
-                    
-               
-             
+
 
                 <p class="gf-survey-results-meta">
                 Total de respostes:

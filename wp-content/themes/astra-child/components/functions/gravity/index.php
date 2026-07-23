@@ -233,7 +233,12 @@ function resultados_encuesta_chart_get_entry_answers($entry, $field) {
 // Convierte una entry en un array asociativo por admin_label con sus etiquetas y valores legibles.
 function resultados_encuesta_chart_get_entry_labeled_values($entry, $form) {
     $entry_labeled_values = array();
+    $entry_id             = isset($entry['id']) ? (string) $entry['id'] : '';
     $fields               = resultados_encuesta_chart_get_field_property($form, 'fields', array());
+
+    if ($entry_id === '') {
+        return $entry_labeled_values;
+    }
 
     foreach ($fields as $field) {
         $field_id          = (string) resultados_encuesta_chart_get_field_property($field, 'id');
@@ -272,6 +277,69 @@ function resultados_encuesta_chart_get_entry_labeled_values($entry, $form) {
 }
 
 
+// Sustituye los IDs de campo de una entry por sus etiquetas de administracion.
+// Los metadatos propios de Gravity Forms (id, form_id, date_created, etc.) se conservan.
+function resultados_encuesta_entry_use_admin_labels($entry, $form) {  
+    if (!is_array($entry)) {
+        return array();
+    }
 
+    $converted_entry = array();
+    $fields          = resultados_encuesta_chart_get_field_property($form, 'fields', array());
+    $fields_by_id    = array();
 
-?>
+    foreach ($fields as $field) {
+        $field_id = (string) resultados_encuesta_chart_get_field_property($field, 'id', '');
+
+        if ($field_id !== '') {
+            $fields_by_id[$field_id] = $field;
+        }
+    }
+
+    foreach ($entry as $entry_key => $entry_value) {
+        $entry_key_string = (string) $entry_key;
+        $field_id         = strstr($entry_key_string, '.', true);
+
+        if ($field_id === false) {
+            $field_id = $entry_key_string;
+        }
+
+        // Si la clave no pertenece a un campo, es metadata y se deja intacta.
+        if (!isset($fields_by_id[$field_id])) {
+            $converted_entry[$entry_key] = $entry_value;
+            continue;
+        }
+
+        $field       = $fields_by_id[$field_id];
+        $admin_label = trim((string) resultados_encuesta_chart_get_field_property($field, 'adminLabel', ''));
+        $field_label = trim((string) resultados_encuesta_chart_get_field_property($field, 'label', ''));
+        $new_key     = $admin_label !== '' ? $admin_label : ($field_label !== '' ? $field_label : $entry_key_string);
+
+        // En campos con varias entradas (checkbox, nombre, direccion, Likert...)
+        // se añade la etiqueta del subcampo para que ninguna respuesta se sobrescriba.
+        if ($entry_key_string !== $field_id) {
+            $inputs = resultados_encuesta_chart_get_field_property($field, 'inputs', array());
+
+            foreach ($inputs as $input) {
+                $input_id = (string) resultados_encuesta_chart_get_field_property($input, 'id', '');
+
+                if ($input_id !== $entry_key_string) {
+                    continue;
+                }
+
+                $input_label = trim((string) resultados_encuesta_chart_get_field_property($input, 'label', ''));
+                $new_key    .= $input_label !== '' ? ' - ' . $input_label : ' (' . $entry_key_string . ')';
+                break;
+            }
+        }
+
+        // Protege el resultado si dos campos tienen la misma etiqueta administrativa.
+        if (array_key_exists($new_key, $converted_entry)) {
+            $new_key .= ' [' . $entry_key_string . ']';
+        }
+
+        $converted_entry[$new_key] = $entry_value;
+    }
+
+    return $converted_entry;
+}

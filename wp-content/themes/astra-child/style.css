@@ -199,10 +199,84 @@ h1.bloc::after {
 
     .gf-survey-results-legend-text {
         display: -webkit-box;
+        flex: 1 1 auto;
+        min-width: 0;
         overflow: hidden;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         line-clamp: 2;
+    }
+
+    .gf-survey-results-legend-stats {
+        display: inline-flex;
+        align-items: center;
+        flex: 0 0 auto;
+        margin-left: auto;
+        padding: 0.35rem 0.65rem;
+        border: 1px solid rgba(21, 55, 92, 0.18);
+        border-radius: 8px;
+        background: rgba(21, 55, 92, 0.08);
+        color: #15375c;
+        font-size: 0.85rem;
+        font-weight: 700;
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+
+    .gf-survey-results-other {
+        margin-top: 1.25rem;
+        padding: 1rem;
+        border: 1px solid rgba(21, 55, 92, 0.1);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.72);
+    }
+
+    .gf-survey-results-other-title {
+        margin: 0 0 0.75rem;
+        color: #15375c;
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .gf-survey-results-other-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .gf-survey-results-other-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.65rem 0.75rem;
+        border-radius: 10px;
+        background: #f4f7fb;
+        color: #344b66;
+        line-height: 1.4;
+    }
+
+    .gf-survey-results-other-text {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .gf-survey-results-other-count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        min-width: 2rem;
+        height: 2rem;
+        padding: 0 0.55rem;
+        border-radius: 999px;
+        background: #15375c;
+        color: #fff;
+        font-size: 0.9rem;
+        line-height: 1;
     }
 
     .gf-survey-results-meta {
