@@ -107,13 +107,35 @@ function resultados_encuesta_chart_shortcode($atts) {
     foreach ($fields as $field) {
         $resultados = [];
 
-       //bloc_1_altres
+        $resultados_altres = [];
 
        
 
         foreach ($entries as $entry) {
-                $entry_con_labels = resultados_encuesta_chart_get_entry_labeled_values($entry, $form);
-                pre($entry_con_labels);
+                 $entry_con_labels = resultados_encuesta_chart_get_entry_labeled_values($entry, $form);
+
+                foreach ($entry_con_labels as $entry_key => $entry_data) {
+                    if (strpos($entry_key, 'altres') !== false) {
+                        $field_values = is_array($entry_data['value']) ? $entry_data['value'] : array($entry_data['value']);
+                        foreach ($field_values as $field_value) {
+                            if ($field_value !== '') {
+                                if (!isset($resultados_altres[$field_value])) {
+                                    $resultados_altres[$field_value] = [
+                                        'entry_key'   => $entry_key,
+                                        'field_value' => $field_value,
+                                        'count'       => 0,
+                                    ];
+                                }
+
+                                $resultados_altres[$field_value]['count']++;
+                            }
+                        }
+                    }
+                }
+
+          
+                 
+          
             $valores = resultados_encuesta_chart_get_entry_answers($entry, $field);
       
           
@@ -181,6 +203,7 @@ function resultados_encuesta_chart_shortcode($atts) {
 
                 <h4>Altres</h4>
                 <hr />  
+                <?php pre($resultados_altres); ?>
 
                
 
