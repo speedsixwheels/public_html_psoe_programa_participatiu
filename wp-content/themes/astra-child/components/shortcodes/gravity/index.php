@@ -114,7 +114,10 @@ function resultados_encuesta_chart_shortcode($atts) {
         foreach ($entries as $entry) {
                  $entry_con_labels = resultados_encuesta_chart_get_entry_labeled_values($entry, $form);
 
+              
+
                 foreach ($entry_con_labels as $entry_key => $entry_data) {
+                
                     if (strpos($entry_key, 'altres') !== false) {
                         $field_values = is_array($entry_data['value']) ? $entry_data['value'] : array($entry_data['value']);
                         foreach ($field_values as $field_value) {
@@ -201,9 +204,21 @@ function resultados_encuesta_chart_shortcode($atts) {
                 </ul>
                 <?php endif; ?>
 
-                <h4>Altres</h4>
-                <hr />  
-                <?php pre($resultados_altres); ?>
+            
+                <?php if (!empty($resultados_altres)) : ?>
+                    <br />
+                    <h4>Altres</h4>
+                    <hr />
+                    <div style="color: red">Revisar ya que a cada pregunta només s'han de mostrar els seus altres de respostes</div>
+                    <ul class="gf-survey-results-altres">
+                        <?php foreach ($resultados_altres as $altres) : ?>
+                            <li>
+                                <strong><?php echo esc_html($altres['field_value']); ?></strong> - <?php echo esc_html($altres['count']); ?> vots
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>  
+                 <?php endif; ?>   
+                
 
                
 
