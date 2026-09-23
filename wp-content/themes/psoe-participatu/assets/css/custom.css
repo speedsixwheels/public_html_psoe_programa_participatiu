@@ -1,0 +1,134 @@
+/* Custom CSS no-Tailwind (fallback + detalles) */
+:root { --brand:#E30613; --brand-dark:#B0050F; --cream:#FAF7F5; --rose:#D50024; --rose-dark:#8E2432; --muted-rose:#9E5F68; --line:#EADCDC; --field:#F8F4F4; }
+body { font-family:'Inter',system-ui,sans-serif; }
+.hero-overlay {
+  background:linear-gradient(90deg,rgba(120,0,10,.82) 0%,rgba(180,5,20,.68) 38%,rgba(227,6,19,.48) 65%,rgba(227,6,19,.28) 100%),linear-gradient(0deg,rgba(227,6,19,.55) 0%,rgba(227,6,19,0) 55%);
+}
+.clamp-3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+img{max-width:100%;height:auto}
+
+/* ============ PÁGINAS PSOE (Image 1 / Image 2) ============ */
+.psoe-hero-title{font-size:clamp(30px,4.6vw,44px);line-height:1.08;font-weight:800;letter-spacing:-0.02em;color:#141414;}
+.psoe-hero-title .red{color:var(--rose);}
+.psoe-hero-sub{font-size:17px;line-height:1.55;color:var(--muted-rose);}
+.psoe-card{background:#fff;border:1px solid #F0E4E4;border-radius:14px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 20px 45px -20px rgba(0,0,0,.18);overflow:hidden;}
+.psoe-card-head{display:flex;align-items:center;gap:8px;background:#FAF0F0;border-bottom:1px solid #F1E2E2;padding:14px 22px;font-weight:700;font-size:17px;color:#222;}
+.psoe-card-body{padding:24px 22px;}
+@media(min-width:640px){.psoe-card-body{padding:28px 30px;}}
+.psoe-prose{font-size:14.5px;line-height:1.6;color:#333;}
+
+/* ============ GRAVITY FORMS — base ============ */
+.gform_wrapper{margin:0 !important;}
+.gform_wrapper .gform_heading{display:none;}
+.gform_wrapper .gfield{margin-bottom:22px;}
+.gform_wrapper .gfield_label{font-weight:700 !important;font-size:15px !important;color:#1c1214 !important;margin-bottom:10px;display:block;}
+.gform_wrapper .gfield_required,.gform_wrapper .gfield_required_suffix{color:var(--rose) !important;}
+.psoe-obligatorio{display:block;font-size:12px;color:#C4505C;font-weight:500;margin-top:3px;}
+.gform_wrapper .gfield_description{font-size:13px;color:#8a7378;}
+.gform_wrapper .validation_message{color:var(--rose);font-size:12px;margin-top:6px;}
+.gform_wrapper .gfield_error input,.gform_wrapper .gfield_error textarea{border-color:var(--rose) !important;}
+
+/* ============ Categorías en tarjetas (Image 1) ============ */
+.psoe-cats .gfield_radio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+@media(max-width:560px){.psoe-cats .gfield_radio{grid-template-columns:repeat(2,1fr);}}
+.psoe-cats .gchoice{position:relative;margin:0 !important;}
+.psoe-cats .gchoice input{position:absolute;opacity:0;inset:0;cursor:pointer;}
+.psoe-cats .gchoice label{display:flex !important;flex-direction:column;align-items:center;gap:10px;max-width:none !important;background:var(--field);border:1px solid var(--line);border-radius:10px;padding:20px 10px 16px;font-weight:500 !important;font-size:14px !important;color:#333 !important;cursor:pointer;transition:border-color .18s,background .18s,box-shadow .18s;text-align:center;margin:0 !important;}
+.psoe-cats .gchoice label:hover{border-color:#C98A92;}
+.psoe-cats .gchoice input:checked + label{border-color:var(--rose);border-width:1.5px;background:#FDF1F2;box-shadow:0 0 0 3px rgba(213,0,36,.08);color:#111 !important;font-weight:600 !important;}
+.psoe-cats .gchoice input:focus-visible + label{outline:2px solid var(--rose);outline-offset:2px;}
+.psoe-cat-icon{display:inline-flex;}
+
+/* ============ Inputs / textarea (Image 1) ============ */
+.gform_wrapper input[type="text"],.gform_wrapper input[type="email"],.gform_wrapper input[type="tel"],.gform_wrapper input[type="url"],.gform_wrapper input[type="number"],.gform_wrapper select,.gform_wrapper textarea{background:var(--field) !important;border:1px solid var(--line) !important;border-radius:10px !important;padding:13px 14px !important;font-size:14px !important;color:#222 !important;width:100%;box-shadow:none !important;}
+.gform_wrapper input::placeholder,.gform_wrapper textarea::placeholder{color:#6f5b5f !important;}
+.gform_wrapper input:focus,.gform_wrapper textarea:focus,.gform_wrapper select:focus{border-color:var(--rose) !important;outline:2px solid rgba(213,0,36,.15);background:#fff !important;}
+.gform_wrapper textarea{min-height:150px;resize:vertical;}
+.psoe-field-nombre input,.psoe-field-email input{padding-left:40px !important;background-repeat:no-repeat !important;background-position:13px center !important;background-size:17px !important;}
+.psoe-field-nombre input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A63A4A' stroke-width='2'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 20c1-4 4-6 8-6s7 2 8 6'/%3E%3C/svg%3E") !important;}
+.psoe-field-email input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A63A4A' stroke-width='2'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='M3 7l9 6 9-6'/%3E%3C/svg%3E") !important;}
+.psoe-two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:560px){.psoe-two-col{grid-template-columns:1fr;}}
+.psoe-textarea-wrap{position:relative;}
+.psoe-counter{position:absolute;right:12px;bottom:10px;font-size:11.5px;color:#A63A4A;}
+
+/* Consentimiento */
+.psoe-consent input[type="checkbox"],.gform_wrapper .gfield_consent input[type="checkbox"]{width:18px;height:18px;accent-color:var(--rose);flex-shrink:0;margin-top:2px;}
+.psoe-consent label,.gform_wrapper .gfield_consent label{font-size:13px !important;font-weight:400 !important;color:#444 !important;line-height:1.55;}
+.psoe-consent a,.gform_wrapper .gfield_consent a{color:var(--rose);text-decoration:none;font-weight:500;}
+.psoe-consent a:hover,.gform_wrapper .gfield_consent a:hover{text-decoration:underline;}
+
+/* ============ Checkboxes encuesta (Image 2) ============ */
+.gform_wrapper .gfield_checkbox .gchoice{display:flex;align-items:flex-start;gap:10px;margin:0 0 12px !important;}
+.gform_wrapper .gfield_checkbox input[type="checkbox"]{width:18px;height:18px;min-width:18px;accent-color:#1a56db;margin-top:2px;cursor:pointer;}
+.gform_wrapper .gfield_checkbox label{font-size:14.5px !important;font-weight:400 !important;color:#222 !important;line-height:1.55;cursor:pointer;}
+.gform_wrapper .gsection{border-bottom:none !important;margin:28px 0 14px !important;padding:0 !important;}
+.gform_wrapper .gsection_title{font-size:15px !important;font-weight:700 !important;color:#111 !important;}
+.psoe-bloc{font-weight:700;font-size:15px;color:#111;margin:26px 0 12px;}
+.psoe-question{font-weight:700;font-size:15px;color:#1f2a5a;line-height:1.5;}
+
+/* ============ Botón envío ============ */
+.gform_wrapper .gform_footer{padding:22px 0 0 !important;margin:22px 0 0 !important;border-top:1px solid #F0E4E4;}
+.psoe-submit{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:var(--rose);color:#fff;font-weight:700;font-size:17px;border:none;border-radius:12px;padding:15px 20px;cursor:pointer;box-shadow:0 8px 20px -8px rgba(213,0,36,.5);transition:background .18s,transform .1s;}
+.psoe-submit:hover{background:#A4001C;}
+.psoe-submit:active{transform:scale(.995);}
+.gform_wrapper .gform_ajax_spinner{display:block;margin:10px auto;}
+
+/* ============ Confirmación ============ */
+.psoe-confirm{background:#F0FDF4;border:1px solid #BBF7D0;color:#166534;border-radius:12px;padding:20px;font-size:15px;text-align:center;}
+
+/* ============ Resultados encuesta (shortcode resultados_encuesta_chart) ============ */
+.gf-survey-results-wrap{--gf-survey-columns:1;--gf-survey-gap:24px;display:flex;flex-wrap:wrap;gap:var(--gf-survey-gap);align-items:stretch;margin:2rem 0;}
+.gf-survey-results-item{display:flex;}
+.gf-survey-results-card{display:flex;flex-direction:column;flex:1 1 auto;width:100%;height:100%;box-sizing:border-box;padding:1.5rem;border:1px solid rgba(227,6,19,.12);border-radius:22px;background:linear-gradient(180deg,#fff 0%,#F9F1F0 100%);box-shadow:0 18px 48px rgba(122,3,11,.10);overflow:hidden;}
+.gf-survey-results-title{margin:0 0 1rem;color:#1C1214;font-size:1.15rem;font-weight:700;line-height:1.35;}
+.gf-survey-results-canvas-wrap{position:relative;height:280px;padding:1rem;border-radius:18px;background:radial-gradient(circle at top,rgba(227,6,19,.12),rgba(227,6,19,.02) 55%,rgba(255,255,255,.96) 100%);}
+.gf-survey-results-canvas-wrap canvas{display:block;width:100% !important;height:100% !important;}
+.gf-survey-results-legend{display:flex;flex-direction:column;gap:.75rem;margin:1rem 0 0;padding:0;list-style:none;}
+.gf-survey-results-legend-item{display:flex;align-items:flex-start;gap:.5rem;min-width:0;color:#1C1214;font-size:.95rem;font-weight:600;line-height:1.35;}
+.gf-survey-results-legend-swatch{flex:0 0 12px;width:12px;height:12px;margin-top:.2rem;border-radius:999px;border:1px solid rgba(28,18,20,.2);}
+.gf-survey-results-legend-text{display:-webkit-box;flex:1 1 auto;min-width:0;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;}
+.gf-survey-results-legend-stats{display:inline-flex;align-items:center;flex:0 0 auto;margin-left:auto;padding:.35rem .65rem;border:1px solid rgba(227,6,19,.18);border-radius:8px;background:#FDECEC;color:#7A030B;font-size:.85rem;font-weight:700;line-height:1.2;white-space:nowrap;}
+.gf-survey-results-other{margin-top:1.25rem;padding:1rem;border:1px solid rgba(227,6,19,.10);border-radius:14px;background:rgba(255,255,255,.72);}
+.gf-survey-results-other-title{margin:0 0 .75rem;color:#1C1214;font-size:1rem;font-weight:700;}
+.gf-survey-results-other-list{display:flex;flex-direction:column;gap:.55rem;margin:0;padding:0;list-style:none;}
+.gf-survey-results-other-item{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.65rem .75rem;border-radius:10px;background:#F9F1F0;color:#5B4B4E;line-height:1.4;}
+.gf-survey-results-other-text{min-width:0;overflow-wrap:anywhere;}
+.gf-survey-results-other-count{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-width:2rem;height:2rem;padding:0 .55rem;border-radius:999px;background:#E30613;color:#fff;font-size:.9rem;font-weight:700;line-height:1;}
+.gf-survey-results-meta{margin:1.25rem 0 0;padding-top:1rem;border-top:1px solid rgba(227,6,19,.10);color:#5B4B4E;font-size:.95rem;}
+.gf-survey-results-meta strong{color:#1C1214;font-size:1rem;}
+@media(max-width:921px){.gf-survey-results-wrap{--gf-survey-columns:2;}}
+@media(max-width:768px){
+.gf-survey-results-wrap{--gf-survey-columns:1;}
+.gf-survey-results-item{min-width:100% !important;max-width:100% !important;flex-basis:100% !important;}
+.gf-survey-results-card{padding:1.25rem;border-radius:18px;}
+.gf-survey-results-legend-text{-webkit-line-clamp:3;line-clamp:3;}
+}
+
+/* ============ Cabeceras BLOC de la enquesta: minimal (badge + título) ============ */
+.psoe-card-body .psoe-bloc-head,
+main#content .psoe-bloc-head,
+.gform_wrapper .psoe-bloc-head,
+h1.psoe-bloc-head{display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;background:none;border:none;border-radius:0;box-shadow:none;padding:0;margin:30px 0 18px;}
+.psoe-bloc-head:first-child{margin-top:0;}
+.psoe-bloc-head > .psoe-bloc-num{flex:0 0 auto;background:#E30613;color:#fff;font-weight:800;font-size:12px;letter-spacing:.08em;padding:6px 13px;border-radius:999px;box-shadow:0 4px 10px -4px rgba(227,6,19,.6);white-space:nowrap;margin:0;}
+.psoe-bloc-head > .psoe-bloc-titles{display:flex;flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:4px 8px;min-width:0;flex:1 1 auto;}
+.psoe-bloc-head > .psoe-bloc-titles > strong{display:inline;font-size:17px;line-height:1.35;color:#1C1214;letter-spacing:-.01em;}
+.psoe-bloc-head > .psoe-bloc-titles > em{display:inline;font-style:normal;font-size:17px;line-height:1.35;color:#1C1214;margin:0;}
+@media(max-width:560px){
+.psoe-card-body .psoe-bloc-head,
+main#content .psoe-bloc-head,
+.gform_wrapper .psoe-bloc-head{gap:10px;}
+.psoe-bloc-head > .psoe-bloc-titles > strong{font-size:15.5px;}
+.psoe-bloc-head > .psoe-bloc-titles > em{font-size:15.5px;}
+}
+
+/* ============ h1.bloc de la enquesta: minimal ============ */
+/* Sin JS: sin fondo ni borde, mismo tono que la cabecera. */
+h1.bloc:not(.psoe-bloc-head){font-size:20px;font-weight:800;letter-spacing:-.01em;color:#1C1214;padding:0;margin:32px 0 18px;line-height:1.35;background:none;border:none;}
+/* Con JS: mismo inline; el h1 solo sube un punto el tamaño. */
+h1.psoe-bloc-head{align-items:center;background:none;border:none;box-shadow:none;padding:0;}
+h1.psoe-bloc-head .psoe-bloc-num{font-size:13px;padding:7px 15px;}
+h1.psoe-bloc-head .psoe-bloc-titles strong{font-size:20px;}
+h1.psoe-bloc-head .psoe-bloc-titles em{font-size:20px;}
+@media(max-width:560px){h1.psoe-bloc-head .psoe-bloc-titles strong{font-size:18px;}h1.psoe-bloc-head .psoe-bloc-titles em{font-size:18px;}}

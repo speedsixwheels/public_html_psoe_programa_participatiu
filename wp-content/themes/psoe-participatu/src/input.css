@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base */
+@layer base {
+  html { @apply scroll-smooth; }
+  body { @apply bg-cream text-ink font-sans antialiased; }
+  ::selection { @apply bg-brand text-white; }
+}
+
+@layer components {
+  .shell { @apply max-w-shell mx-auto px-4 sm:px-6; }
+  .btn { @apply inline-flex items-center justify-center gap-2 font-semibold text-sm rounded-md px-5 py-2.5 transition-all duration-200; }
+  .btn-white { @apply bg-white text-brand hover:bg-neutral-100 shadow-card; }
+  .btn-outline-w { @apply border border-white/60 text-white hover:bg-white/10; }
+  .btn-brand { @apply bg-brand text-white hover:bg-brand-dark shadow-hero; }
+  .btn-ghost { @apply border border-brand/30 text-brand hover:bg-brand hover:text-white; }
+  .eyebrow { @apply text-[11px] font-bold tracking-[0.14em] uppercase text-brand; }
+  .card { @apply bg-white rounded-xl2 shadow-card border border-black/5; }
+  .chip { @apply inline-flex items-center text-[11px] font-semibold px-2 py-0.5 rounded; }
+  .navlink { @apply text-[13px] font-medium text-neutral-700 hover:text-brand transition-colors; }
+  .stat-num { @apply text-2xl font-extrabold tracking-tight text-ink; }
+  .stat-label { @apply text-[11px] font-bold tracking-wider uppercase text-brand flex items-center gap-1; }
+  .stat-sub { @apply text-xs text-ink-muted; }
+  .input-search { @apply w-full text-sm bg-[#F3EDEB] border-0 rounded-md pl-9 pr-3 py-2 placeholder:text-neutral-500 focus:ring-2 focus:ring-brand/30 outline-none; }
+  .input-mail { @apply w-full text-sm bg-white/10 border border-white/20 rounded-md px-4 py-2.5 text-white placeholder:text-white/50 outline-none focus:border-white/50 focus:bg-white/15; }
+}
+
+/* Hero gradient like screenshot */
+.hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(120,0,10,.82) 0%, rgba(180,5,20,.68) 38%, rgba(227,6,19,.48) 65%, rgba(227,6,19,.28) 100%),
+    linear-gradient(0deg, rgba(227,6,19,.55) 0%, rgba(227,6,19,0) 55%);
+}
+.area-card img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.area-card:hover img { transform: scale(1.06); }
+.propuesta-card { transition: transform .25s ease, box-shadow .25s ease; }
+.propuesta-card:hover { transform: translateY(-3px); box-shadow: 0 16px 32px -16px rgba(0,0,0,.22); }
+.vote-btn.voted { @apply bg-brand text-white border-brand; }
+
+/* Clamp helpers */
+.clamp-2 { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.clamp-3 { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
