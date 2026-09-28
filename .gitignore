@@ -1,0 +1,2 @@
+# Dependencias de build del theme (npm run build → assets/css/theme.css)
+node_modules/

@@ -49,6 +49,7 @@ add_action( 'add_meta_boxes', function () {
 add_action( 'save_post_propuesta', function ( $post_id ) {
   if ( ! isset( $_POST['psoe_meta_nonce'] ) || ! wp_verify_nonce( $_POST['psoe_meta_nonce'], 'psoe_meta' ) ) return;
   if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+  if ( ! current_user_can( 'edit_post', $post_id ) ) return;
   if ( isset( $_POST['psoe_votos_field'] ) ) {
     update_post_meta( $post_id, '_psoe_votos', max( 0, (int) $_POST['psoe_votos_field'] ) );
   }
