@@ -1,4 +1,4 @@
-/**
+o/**
 Theme Name: Astra Child
 Author: Brainstorm Force
 Author URI: http://wpastra.com/about/
@@ -8,7 +8,7 @@ License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: astra-child
 Template: astra
-*/
+*/  
 
 /** GRAVITY FORMS **/
 .gform-theme--framework .gfield:where(:not(.gfield--type-html):not(.gfield--type-section)) {
