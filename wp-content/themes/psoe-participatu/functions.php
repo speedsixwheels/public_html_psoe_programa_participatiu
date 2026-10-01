@@ -120,3 +120,10 @@ add_action( 'admin_notices', function () {
   if ( ! $screen || $screen->id !== 'themes' ) return;
   echo '<div class="notice notice-info"><p><strong>PSOE Participatiu:</strong> edita Portada desde Apariencia → Personalizar (stats, hero, newsletter) y crea Propuestas desde el CPT “Propuestas”. Asigna una página con plantilla Portada como portada estática.</p></div>';
 } );
+
+
+function pre($item){
+    echo "<pre>";
+    print_r($item);
+    echo "</pre>";
+}

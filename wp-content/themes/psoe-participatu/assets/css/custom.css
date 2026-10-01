@@ -1,6 +1,25 @@
 /* Custom CSS no-Tailwind (fallback + detalles) */
 :root { --brand:#E30613; --brand-dark:#B0050F; --cream:#FAF7F5; --rose:#D50024; --rose-dark:#8E2432; --muted-rose:#9E5F68; --line:#EADCDC; --field:#F8F4F4; }
 body { font-family:'Inter',system-ui,sans-serif; }
+
+/* ============ DIAGNÓSTICO VPN/PROXY (solo admins) ============ */
+.psoe-debug{margin:0 0 22px;background:#141414;color:#F3E9EA;border:1px solid #2A2022;border-radius:14px;padding:16px 18px;font-size:13px;box-shadow:0 12px 30px -18px rgba(0,0,0,.7);}
+.psoe-debug-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;margin-bottom:10px;}
+.psoe-debug-title{font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:11px;color:#fff;}
+.psoe-debug-pill{background:rgba(227,6,19,.16);border:1px solid rgba(227,6,19,.55);color:#FF7C86;border-radius:999px;padding:4px 12px;font-size:11px;font-weight:700;}
+.psoe-debug-ip{margin:0 0 10px;color:#B9A8AC;}
+.psoe-debug table{width:100%;border-collapse:collapse;font-size:12.5px;}
+.psoe-debug th{text-align:left;text-transform:uppercase;letter-spacing:.06em;font-size:10px;color:#8E7B80;padding:6px 8px;border-bottom:1px solid #2A2022;}
+.psoe-debug td{padding:7px 8px;border-bottom:1px solid #221A1C;vertical-align:top;color:#EADCDC;}
+.psoe-debug tr:last-child td{border-bottom:none;}
+.psoe-debug tr.is-active td{background:rgba(227,6,19,.10);}
+.psoe-debug-key{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all;}
+.psoe-debug-flag{display:inline-block;background:#E30613;color:#fff;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:2px 8px;vertical-align:middle;}
+.psoe-debug-error{color:#FF9AA3;font-style:italic;}
+.psoe-debug-foot{margin:10px 0 0;color:#B9A8AC;}
+.psoe-debug-foot code{background:#221A1C;border:1px solid #2A2022;border-radius:6px;padding:2px 6px;color:#FF7C86;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all;}
+.psoe-debug-note{opacity:.6;font-size:11px;}
+@media(max-width:640px){.psoe-debug{overflow-x:auto;}.psoe-debug table{min-width:520px;}}
 .hero-overlay {
   background:linear-gradient(90deg,rgba(120,0,10,.82) 0%,rgba(180,5,20,.68) 38%,rgba(227,6,19,.48) 65%,rgba(227,6,19,.28) 100%),linear-gradient(0deg,rgba(227,6,19,.55) 0%,rgba(227,6,19,0) 55%);
 }
@@ -11,6 +30,35 @@ img{max-width:100%;height:auto}
 .psoe-hero-title{font-size:clamp(30px,4.6vw,44px);line-height:1.08;font-weight:800;letter-spacing:-0.02em;color:#141414;}
 .psoe-hero-title .red{color:var(--rose);}
 .psoe-hero-sub{font-size:17px;line-height:1.55;color:var(--muted-rose);}
+
+/* ============ HERO PORTADA — utilidades ausentes en theme.css (parche) ============
+   assets/css/theme.css se compiló antes de los últimos cambios de front-page.php
+   (el entorno no tiene Node/npm para volver a compilar), así que estas clases del
+   hero todavía no existen en el CSS compilado y la portada se rompía (h1 a 16px,
+   sin degradado sobre la imagen, sin opacidad ni espaciados).
+   Se reproducen aquí con exactamente el mismo valor que genera Tailwind 3: al
+   ejecutar `npm run build` el compilado vuelve a generarlas idénticas, por lo que
+   no hay ningún cambio visual y este bloque queda como redundancia inocua. */
+.mb-4{margin-bottom:1rem}
+.mt-7{margin-top:1.75rem}
+.py-16{padding-top:4rem;padding-bottom:4rem}
+.px-3\.5{padding-left:.875rem;padding-right:.875rem}
+.max-w-\[640px\]{max-width:640px}
+.text-\[36px\]{font-size:36px}
+.leading-\[1\.08\]{line-height:1.08}
+.text-white\/95{color:rgba(255,255,255,.95)}
+.opacity-45{opacity:.45}
+.border-white\/30{border-color:rgba(255,255,255,.3)}
+.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}
+.from-black\/80{--tw-gradient-from:rgba(0,0,0,.8);--tw-gradient-to:rgba(0,0,0,0);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}
+.via-black\/50{--tw-gradient-to:rgba(0,0,0,0);--tw-gradient-stops:var(--tw-gradient-from),rgba(0,0,0,.5),var(--tw-gradient-to)}
+.hover\:bg-\[\#C20510\]:hover{background-color:#C20510}
+.hover\:bg-white\/20:hover{background-color:rgba(255,255,255,.2)}
+@media(min-width:640px){
+  .sm\:min-h-\[480px\]{min-height:480px}
+  .sm\:text-\[50px\]{font-size:50px}
+  .sm\:text-\[17px\]{font-size:17px}
+}
 .psoe-card{background:#fff;border:1px solid #F0E4E4;border-radius:14px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 20px 45px -20px rgba(0,0,0,.18);overflow:hidden;}
 .psoe-card-head{display:flex;align-items:center;gap:8px;background:#FAF0F0;border-bottom:1px solid #F1E2E2;padding:14px 22px;font-weight:700;font-size:17px;color:#222;}
 .psoe-card-body{padding:24px 22px;}
@@ -69,9 +117,22 @@ img{max-width:100%;height:auto}
 
 /* ============ Botón envío ============ */
 .gform_wrapper .gform_footer{padding:22px 0 0 !important;margin:22px 0 0 !important;border-top:1px solid #F0E4E4;}
-.psoe-submit{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:var(--rose);color:#fff;font-weight:700;font-size:17px;border:none;border-radius:12px;padding:15px 20px;cursor:pointer;box-shadow:0 8px 20px -8px rgba(213,0,36,.5);transition:background .18s,transform .1s;}
-.psoe-submit:hover{background:#A4001C;}
-.psoe-submit:active{transform:scale(.995);}
+
+/* El tema orbital de Gravity Forms pinta el botón de azul (--gf-color-primary: #204ce5)
+   con selectores de alta especificidad y se carga DESPUÉS de custom.css, así que
+   estas reglas necesitan !important para imponer la paleta PSOE. */
+.gform_wrapper{--gf-color-primary:#E30613 !important;--gf-color-primary-rgb:227,6,19 !important;--gf-color-primary-darker:#B0050F !important;--gf-color-primary-lighter:#FF5A63 !important;--gf-color-primary-contrast:#fff !important;--gf-color-primary-contrast-rgb:255,255,255 !important;}
+/* Estilo "badge BLOC": píldora roja, texto blanco en mayúsculas, sombra suave. */
+.gform_wrapper .psoe-submit,
+.gform_wrapper button.psoe-submit{display:flex !important;align-items:center !important;justify-content:center !important;gap:10px !important;width:100% !important;background-color:#E30613 !important;background-image:none !important;border:none !important;border-radius:999px !important;color:#fff !important;font-weight:800 !important;font-size:14px !important;text-transform:uppercase !important;letter-spacing:.1em !important;padding:15px 28px !important;cursor:pointer !important;box-shadow:0 10px 22px -6px rgba(227,6,19,.55) !important;transition:background-color .18s,box-shadow .18s,transform .1s !important;}
+.gform_wrapper .psoe-submit:hover,
+.gform_wrapper button.psoe-submit:hover{background-color:#C40512 !important;background-image:none !important;box-shadow:0 14px 28px -6px rgba(196,5,18,.6) !important;}
+.gform_wrapper .psoe-submit:active,
+.gform_wrapper button.psoe-submit:active{transform:scale(.995) !important;}
+.gform_wrapper .psoe-submit:focus-visible,
+.gform_wrapper button.psoe-submit:focus-visible{outline:3px solid rgba(227,6,19,.35) !important;outline-offset:2px !important;}
+.gform_wrapper .psoe-submit:disabled,
+.gform_wrapper button.psoe-submit:disabled{opacity:.6 !important;cursor:not-allowed !important;box-shadow:none !important;}
 .gform_wrapper .gform_ajax_spinner{display:block;margin:10px auto;}
 
 /* ============ Confirmación ============ */
@@ -84,11 +145,11 @@ img{max-width:100%;height:auto}
 .gf-survey-results-title{margin:0 0 1rem;color:#1C1214;font-size:1.15rem;font-weight:700;line-height:1.35;}
 .gf-survey-results-canvas-wrap{position:relative;height:280px;padding:1rem;border-radius:18px;background:radial-gradient(circle at top,rgba(227,6,19,.12),rgba(227,6,19,.02) 55%,rgba(255,255,255,.96) 100%);}
 .gf-survey-results-canvas-wrap canvas{display:block;width:100% !important;height:100% !important;}
-.gf-survey-results-legend{display:flex;flex-direction:column;gap:.75rem;margin:1rem 0 0;padding:0;list-style:none;}
-.gf-survey-results-legend-item{display:flex;align-items:flex-start;gap:.5rem;min-width:0;color:#1C1214;font-size:.95rem;font-weight:600;line-height:1.35;}
-.gf-survey-results-legend-swatch{flex:0 0 12px;width:12px;height:12px;margin-top:.2rem;border-radius:999px;border:1px solid rgba(28,18,20,.2);}
-.gf-survey-results-legend-text{display:-webkit-box;flex:1 1 auto;min-width:0;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;}
-.gf-survey-results-legend-stats{display:inline-flex;align-items:center;flex:0 0 auto;margin-left:auto;padding:.35rem .65rem;border:1px solid rgba(227,6,19,.18);border-radius:8px;background:#FDECEC;color:#7A030B;font-size:.85rem;font-weight:700;line-height:1.2;white-space:nowrap;}
+.gf-survey-results-legend{display:flex;flex-direction:column;gap:.6rem;margin:1rem 0 0;padding:0;list-style:none;}
+.gf-survey-results-legend-item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:.35rem .65rem;align-items:start;min-width:0;margin:0;padding:.7rem .8rem;border:1px solid rgba(227,6,19,.12);border-radius:12px;background:#fff;color:#1C1214;font-size:.95rem;font-weight:500;line-height:1.5;}
+.gf-survey-results-legend-swatch{flex:0 0 auto;width:12px;height:12px;margin-top:.32rem;border-radius:999px;border:1px solid rgba(28,18,20,.2);}
+.gf-survey-results-legend-text{display:block;min-width:0;overflow:visible;overflow-wrap:anywhere;}
+.gf-survey-results-legend-stats{display:inline-flex;align-items:center;flex:0 0 auto;margin:0;padding:.35rem .65rem;border:1px solid rgba(227,6,19,.18);border-radius:8px;background:#FDECEC;color:#7A030B;font-size:.85rem;font-weight:700;line-height:1.2;white-space:nowrap;}
 .gf-survey-results-other{margin-top:1.25rem;padding:1rem;border:1px solid rgba(227,6,19,.10);border-radius:14px;background:rgba(255,255,255,.72);}
 .gf-survey-results-other-title{margin:0 0 .75rem;color:#1C1214;font-size:1rem;font-weight:700;}
 .gf-survey-results-other-list{display:flex;flex-direction:column;gap:.55rem;margin:0;padding:0;list-style:none;}
@@ -102,7 +163,8 @@ img{max-width:100%;height:auto}
 .gf-survey-results-wrap{--gf-survey-columns:1;}
 .gf-survey-results-item{min-width:100% !important;max-width:100% !important;flex-basis:100% !important;}
 .gf-survey-results-card{padding:1.25rem;border-radius:18px;}
-.gf-survey-results-legend-text{-webkit-line-clamp:3;line-clamp:3;}
+.gf-survey-results-legend-item{grid-template-columns:auto minmax(0,1fr);font-size:.92rem;}
+.gf-survey-results-legend-stats{grid-column:2;justify-self:start;margin-top:.15rem;}
 }
 
 /* ============ Cabeceras BLOC de la enquesta: minimal (badge + título) ============ */

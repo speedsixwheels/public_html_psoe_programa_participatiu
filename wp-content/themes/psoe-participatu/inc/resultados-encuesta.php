@@ -639,7 +639,7 @@ function psoe_enquesta_style_bloc_h1( $content ) {
 		'/<h1([^>]*\bclass\s*=\s*(?:"[^"]*\bbloc\b[^"]*"|\'[^\']*\bbloc\b[^\']*\')[^>]*)>(?:\s|<[^>]+>)*?BLOC\s*(\d+)\s*:?\s*(.*?)\s*<\/h1>/is',
 		function ( $m ) {
 			$num  = $m[2];
-			$rest = trim( wp_strip_all_tags( $m[3] ) );
+			$rest = trim($m[3]);
 			$tagline = '';
 			if ( preg_match( '/\(([^()]*)\)\s*$/', $rest, $pm ) ) {
 				$tagline = trim( $pm[1] );
@@ -651,7 +651,7 @@ function psoe_enquesta_style_bloc_h1( $content ) {
 				. '</span><span class="psoe-bloc-titles"><strong>'
 				. esc_html( $title )
 				. '</strong>'
-				. ( $tagline !== '' ? '<em>' . esc_html( $tagline ) . '</em>' : '' )
+				. ( $tagline !== '' ? '<em> (' . esc_html( $tagline ) . ')</em>' : '' )
 				. '</span></h1>';
 		},
 		$content

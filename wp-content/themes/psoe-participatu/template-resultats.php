@@ -25,7 +25,7 @@ while ( have_posts() ) : the_post();
   }
 ?>
 <section class="bg-[#FBF7F6]">
-  <div class="max-w-[880px] mx-auto px-4 sm:px-6 pt-10 pb-16">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 pt-10 pb-16">
 
     <div class="max-w-[700px]">
       <span class="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.14em] uppercase text-[#D50024] bg-[#FDECEC] border border-[#E30613]/15 rounded-full px-3 py-1">

@@ -133,10 +133,10 @@ function initPsoeBlocs() {
     let rest = m[2].trim();
     let tagline = '';
     const pm = rest.match(/\(([^()]*)\)\s*$/);
-    if (pm) {
+     if (pm) {
       tagline = pm[1].trim();
       rest = rest.slice(0, pm.index).trim().replace(/[:–—-]\s*$/, '');
-    }
+    } 
 
     const badge = document.createElement('span');
     badge.className = 'psoe-bloc-num';
@@ -148,7 +148,8 @@ function initPsoeBlocs() {
     titles.appendChild(title);
     if (tagline) {
       const tag = document.createElement('em');
-      tag.textContent = tagline;
+      // Se conservan los paréntesis originales del título.
+      tag.textContent = ' (' + tagline + ')';
       titles.appendChild(tag);
     }
     // Transformación in situ: conserva la etiqueta original (h1, p, div…).

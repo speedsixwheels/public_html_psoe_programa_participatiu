@@ -79,18 +79,15 @@ while ( have_posts() ) : the_post();
             echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE); */
    
           //pre($result);
-
-        // Diagnòstic (només admins): peticions restants + API key en ús.
-        psoe_vpn_debug_panel( $apiKeys, $ip, $result ?? null );
-
-
+        
+      
         if(!isset($result) || !$result['vpn_detected']){
             echo do_shortcode("[gravityform id='2' title='false' description='false']"); 
         }
         else{
           echo "<p>" . esc_html__( "S'ha detectat una connexió VPN o proxy. No es permet partipar amb aquesta connexió.", 'psoe-participatiu' ) . "</p>";
         }
-         
+        
         ?>
       </div>
     </div>
