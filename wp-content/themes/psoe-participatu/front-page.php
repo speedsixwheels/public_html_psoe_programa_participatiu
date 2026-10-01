@@ -7,7 +7,7 @@
 get_header();
 while ( have_posts() ) : the_post();
   $subtitle   = has_excerpt() ? get_the_excerpt() : '';
-  $hero_img   = get_theme_mod( 'psoe_hero_img' ) ?: 'https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/valencia/vinaros-castellon-s1581893170.jpg_604889389.jpg';
+  $hero_img   = get_theme_mod( 'psoe_hero_img' ) ?: get_stylesheet_directory_uri() . '/assets/img/hero.jpg';
   $hero_badge = get_theme_mod( 'psoe_hero_badge', 'Programa electoral col·laboratiu' );
   $hero_title = get_theme_mod( 'psoe_hero_title', 'Construïm un nou Vinaròs. Participa amb les teves idees, y vota les propostes.' );
   $hero_sub   = get_theme_mod( 'psoe_hero_sub', 'Avancem cap al 2027.' );
